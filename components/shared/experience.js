@@ -2,12 +2,15 @@ import createRenderer from '../three/sceneElem/createRenderer';
 import createCamera from '../three/sceneElem/createCamera';
 import createScene from '../three/sceneElem/createScene';
 import createLigths from '../three/sceneElem/createLigths';
-import taskSubscribe from './taskSubscribe'
 
 import createPlane from '../three/geometries/createPlane';
 import createCube from '../three/geometries/createCube';
-import geometryRotation from '../three/geometryRotation';
-import addOnScene from '../three/addOnScene';
+
+import boxAnimation from '../three/animation/boxAnimation';
+import planeAnimation from '../three/animation/planeAnimation';
+
+import addOnScene from '../three/utils/addOnScene';
+import taskSubscribe from './taskSubscribe';
 
 import useTaskStore from '../../store/useTaskStore';
 
@@ -23,7 +26,7 @@ const experience = () => {
 
     // Create elems
     const cube = createCube();
-    const plane = createPlane(directionLight);
+    const plane = createPlane();
 
     // Added on scene 
     addOnScene(scene, ambientLight, directionLight);
@@ -38,8 +41,8 @@ const experience = () => {
 
         requestAnimationFrame(animate);
 
-        geometryRotation(scene, cube);
-        plane.material.uniforms.uTime.value += 0.05;
+        boxAnimation(scene, cube);
+        planeAnimation(scene, plane);
 
         renderer.render(scene, camera);
     }

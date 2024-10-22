@@ -1,8 +1,9 @@
-import { AmbientLight, DirectionalLight, PerspectiveCamera } from "three";
+import { AmbientLight, DirectionalLight } from "three";
 
-const createLigths = (scene) => {
-    const ambientLight = new AmbientLight(0x808080)
-    const directionLight = new DirectionalLight(0xffffff, 0.5)
+const createLigths = () => {
+    const ambientLight = new AmbientLight(0xffffff);
+    const directionLight = new DirectionalLight(0xffffff, 2);
+    
     return { ambientLight, directionLight };
 }
 
