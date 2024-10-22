@@ -1,7 +1,8 @@
+import createControls from '../three/sceneElem/createControls';
 import createRenderer from '../three/sceneElem/createRenderer';
+import createLigths from '../three/sceneElem/createLigths';
 import createCamera from '../three/sceneElem/createCamera';
 import createScene from '../three/sceneElem/createScene';
-import createLigths from '../three/sceneElem/createLigths';
 
 import createPlane from '../three/geometries/createPlane';
 import createCube from '../three/geometries/createCube';
@@ -14,13 +15,15 @@ import taskSubscribe from './taskSubscribe';
 
 import useTaskStore from '../../store/useTaskStore';
 
+
 const experience = () => {
 
     // Create Scene
     const scene = createScene();
     const camera = createCamera();
     const renderer = createRenderer();
-
+    const controls = createControls(camera, renderer);
+    
     // Light 
     const { ambientLight, directionLight } = createLigths()
 
@@ -35,11 +38,11 @@ const experience = () => {
     } else if (useTaskStore.getState().currentTask === 2) {
         addOnScene(scene, plane);
     }
-
+    
     // Animation
     function animate() {
-
         requestAnimationFrame(animate);
+        controls.update();
 
         boxAnimation(scene, cube);
         planeAnimation(scene, plane);

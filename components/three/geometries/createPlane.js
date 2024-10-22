@@ -28,8 +28,6 @@ const createPlane = () => {
     const plane = new Mesh(geometry, material);
     
     plane.rotation.x = -Math.PI / 2;
-    plane.position.y = -1;
-    plane.position.z = -2;
 
     return plane;
 }
