@@ -4,13 +4,11 @@ import { immer } from 'zustand/middleware/immer';
 const useLinesStore = createStore(
     immer((set) => ({
         isSelected: false,
+        isClickChange: false,
         isDrawing: false,
-        mousePosition: { x: 1, y: 0 },
         currentLine: null,
+        toDelet: null,
         lines: [],
-        setMousePosition: (value) => set((state) => {
-            state.mousePosition = value;
-        }),
         setIsSelected: (value) => set((state) => {
             state.isSelected = value;
         }),
@@ -24,8 +22,15 @@ const useLinesStore = createStore(
             state.lines.push(value);
         }),
         removeLines: (value) => set((state) => {
-            state.lines = state.lines.filter(line => line.uuid === value.uuid);
+            state.lines = state.lines.filter(item => item.line.uuid !== value.uuid);
         }),
+        setToDelet: (value) => set((state) => {
+            state.toDelet = value;
+        }),
+        setIsClickChange: (value) => set((state) => {
+            state.isClickChange = value;
+        }),
+         
     }))
 );
 

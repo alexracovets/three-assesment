@@ -17,7 +17,8 @@ const startDrawing = (renderer, controls, scene) => {
             renderer.domElement.style.cursor = 'auto';
 
             if (useLinesStore.getState().isDrawing) {
-                const line = useLinesStore.getState().currentLine
+                const { line, label } = useLinesStore.getState().currentLine
+                scene.remove(line);
                 scene.remove(line);
                 useLinesStore.getState().removeLines(line);
                 useLinesStore.getState().setIsDrawing(false);

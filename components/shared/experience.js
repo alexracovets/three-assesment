@@ -1,4 +1,5 @@
 import { Raycaster } from 'three';
+import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer';
 
 import planeAnimation from '../three/animation/planeAnimation';
 import createControls from '../three/sceneElem/createControls';
@@ -8,11 +9,10 @@ import createLigths from '../three/sceneElem/createLigths';
 import boxAnimation from '../three/animation/boxAnimation';
 import createPlane from '../three/geometries/createPlane';
 import createScene from '../three/sceneElem/createScene';
-import createCube from '../three/geometries/createCube';
 import pointerClick from '../three/events/pointerClick';
 import startDrawing from '../three/events/startDrawing';
+import createCube from '../three/geometries/createCube';
 import pointerMove from '../three/events/pointerMove';
-import addOnScene from '../three/utils/addOnScene';
 import taskSubscribe from '../three/taskSubscribe';
 
 import useTaskStore from '../../store/useTaskStore';
@@ -26,6 +26,12 @@ const experience = () => {
     const controls = createControls(camera, renderer);
     const { ambientLight, directionLight } = createLigths();
 
+    const labelRenderer = new CSS2DRenderer();
+    labelRenderer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.domElement.style.position = 'absolute';
+    labelRenderer.domElement.style.top = '0px';
+    labelRenderer.domElement.style.pointerEvents = 'none';
+
     // Create elems
     const cube = createCube();
     const plane = createPlane();
@@ -35,8 +41,8 @@ const experience = () => {
     // z-fight fix
     const cube2Fake = createCube([2, 0, 0], 2);
     const cube3Fake = createCube([-2, 0, 0], 2);
-    cube2Fake.scale.set(1.001, 1.001, 1.001);
-    cube3Fake.scale.set(1.001, 1.001, 1.001);
+    cube2Fake.scale.set(1.0005, 1.0005, 1.0005);
+    cube3Fake.scale.set(1.0005, 1.0005, 1.0005);
     cube2Fake.visible = false;
     cube3Fake.visible = false;
 
@@ -45,20 +51,20 @@ const experience = () => {
     const pickableObjects = [cube2Fake, cube3Fake];
 
     // Added on scene 
-    addOnScene(scene, ambientLight, directionLight);
+    scene.add(ambientLight, directionLight);
 
     switch (useTaskStore.getState().currentTask) {
         case 1:
             // added elem for task 1
-            addOnScene(scene, cube);
+            scene.add(cube);
             break;
         case 2:
             // added elem for task 2 
-            addOnScene(scene, plane);
+            scene.add(plane);
             break;
         case 3:
             // added elem for task 3
-            addOnScene(scene, cube2, cube3, cube2Fake, cube3Fake);
+            scene.add(cube2, cube3, cube2Fake, cube3Fake);
 
             // added drawing events
             startDrawing(renderer, controls, scene);
@@ -69,7 +75,6 @@ const experience = () => {
         default:
             break;
     }
-
     // Animation
     function animate() {
         requestAnimationFrame(animate);
@@ -77,13 +82,16 @@ const experience = () => {
 
         boxAnimation(scene, cube);
         planeAnimation(scene, plane);
+
         renderer.render(scene, camera);
+        labelRenderer.render(scene, camera);
     }
 
     taskSubscribe(scene, plane, cube, cube2, cube3);
     animate();
 
     document.body.appendChild(renderer.domElement);
+    document.body.appendChild(labelRenderer.domElement)
 }
 
 export default experience;
