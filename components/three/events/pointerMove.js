@@ -27,10 +27,12 @@ const pointerMove = (renderer, camera, raycaster, pickableObjects) => {
 
             if (intersects.length > 0) {
                 //udate last move position
+                const intersectionPoint = intersects[0].point;
+
                 const positions = line.geometry.attributes.position.array;
-                positions[3] = intersects[0].point.x;
-                positions[4] = intersects[0].point.y;
-                positions[5] = intersects[0].point.z;
+                positions[3] = intersectionPoint.x;
+                positions[4] = intersectionPoint.y;
+                positions[5] = intersectionPoint.z;
 
                 // update label value
                 const start = new Vector3(positions[0], positions[1], positions[2]);

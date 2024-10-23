@@ -18,7 +18,7 @@ const renderLinesToHTML = (lines) => {
         const button = document.createElement('button');
         button.textContent = 'X';
         button.addEventListener('click', () => {
-            useLinesStore.getState().setToDelet(list);  // Викликаємо функцію видалення лінії
+            useLinesStore.getState().setToDelet(list);
         });
 
         index++;

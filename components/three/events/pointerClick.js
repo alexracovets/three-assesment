@@ -9,7 +9,6 @@ import createLine from "../geometries/createLine";
 const pointerClick = (renderer, camera, scene, raycaster, pickableObjects) => {
     const click = () => {
         if (useLinesStore.getState().isSelected) {
-
             const { x: mouseX, y: mouseY } = useMouseStore.getState().mousePosition;
 
             raycaster.setFromCamera({ x: mouseX, y: mouseY }, camera);
@@ -18,11 +17,12 @@ const pointerClick = (renderer, camera, scene, raycaster, pickableObjects) => {
             if (intersects.length > 0) {
                 if (!useLinesStore.getState().isDrawing) {
                     // Start drawing the line
+                    const intersectionPoint = intersects[0].point;
 
                     // geting line points for start
                     const points = [];
-                    points.push(intersects[0].point);
-                    points.push(intersects[0].point.clone());
+                    points.push(intersectionPoint);
+                    points.push(intersectionPoint.clone());
 
                     // create line
                     const line = createLine(points);

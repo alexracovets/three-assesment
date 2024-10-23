@@ -19,7 +19,7 @@ const startDrawing = (renderer, controls, scene) => {
             if (useLinesStore.getState().isDrawing) {
                 const { line, label } = useLinesStore.getState().currentLine
                 scene.remove(line);
-                scene.remove(line);
+                scene.remove(label);
                 useLinesStore.getState().removeLines(line);
                 useLinesStore.getState().setIsDrawing(false);
             }
