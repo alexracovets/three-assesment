@@ -3,7 +3,7 @@ import { immer } from 'zustand/middleware/immer';
 
 const useTaskStore = createStore(
     immer((set) => ({
-        currentTask: 2,
+        currentTask: 3,
         setCurrentTask: (value) => set((state) => {
             state.currentTask = value;
         }),

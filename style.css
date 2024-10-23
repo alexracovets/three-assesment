@@ -2,29 +2,37 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Audiowide", sans-serif;
+  line-height: 1;
 }
 
 header {
   position: absolute;
   left: 0;
   top: 0;
+  z-index: 1;
   width: 100%;
-  z-index: 10;
   background: rgb(204, 202, 202);
+}
+
+button {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
 }
 
 header ul {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  list-style: none;
 }
 
 header ul li {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 22px;
-  font-family: "Audiowide", sans-serif;
   padding: 1rem;
   color: rgba(20, 20, 20, 0.63);
   cursor: pointer;
@@ -34,4 +42,66 @@ header ul li {
 header ul li:hover,
 header ul li.active {
   color: #4dc3a9;
+}
+
+aside {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  width: 300px;
+  height: 100dvh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  background: rgb(204, 202, 202);
+  padding: 100px 20px 10px 20px;
+}
+
+aside h3 {
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+aside .interact {
+  margin-bottom: 20px;
+}
+
+aside ul {
+  width: 100%;
+  display: flex;
+  flex-direction: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+aside ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 20px;
+  gap: 10px;
+}
+
+aside ul li button {
+  padding: 3px 5px;
+  font-size: 16px;
+  border: 1px solid #4dc3a9;
+  border-radius: 4px;
+}
+
+aside ul li button:hover {
+  background-color: red;
+}
+
+.message {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: #4dc3a9;
+  padding: 10px;
 }
